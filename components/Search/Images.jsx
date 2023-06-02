@@ -1,5 +1,5 @@
 import { Image, View } from 'react-native';
-import { assets } from '../constants';
+import { assets } from '../../constants';
 
 const Images = () => {
   return (

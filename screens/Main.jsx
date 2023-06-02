@@ -1,6 +1,6 @@
 import { View, ScrollView, SafeAreaView } from 'react-native';
 
-import { FocusedStatusBar, Header, Images, Navigation } from '../components';
+import { Header, FocusedStatusBar, Search, Word } from '../components';
 import { COLORS } from '../constants';
 
 const Main = () => {
@@ -15,8 +15,10 @@ const Main = () => {
         }}
       >
         <Header />
-        <Images />
-        <Navigation />
+        <View style={{ justifyContent: 'center', alignItems: 'center' }}>
+          <Search />
+          <Word />
+        </View>
       </View>
     </SafeAreaView>
   );
