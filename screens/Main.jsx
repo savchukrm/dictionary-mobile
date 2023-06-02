@@ -1,23 +1,25 @@
-import { View, ScrollView, SafeAreaView } from 'react-native';
+import { View, SafeAreaView } from 'react-native';
+import { useSelector } from 'react-redux';
 
 import { Header, FocusedStatusBar, Search, Word } from '../components';
 import { COLORS } from '../constants';
 
 const Main = () => {
+  const { word, status } = useSelector((state) => state.data);
+
   return (
     <SafeAreaView style={{ backgroundColor: COLORS.darkblue }}>
       <FocusedStatusBar barStyle={'light-content'} />
 
-      <View
-        style={{
-          height: '100%',
-          justifyContent: 'space-between',
-        }}
-      >
+      <View style={{ height: '100%' }}>
         <Header />
-        <View style={{ justifyContent: 'center', alignItems: 'center' }}>
+
+        <View
+          showsVerticalScrollIndicator={false}
+          style={{ marginTop: 50, alignItems: 'center' }}
+        >
           <Search />
-          <Word />
+          {status === 'success' && word.results && <Word />}
         </View>
       </View>
     </SafeAreaView>
