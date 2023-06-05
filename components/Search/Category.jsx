@@ -178,8 +178,8 @@ const Category = () => {
 
   return (
     <FlatList
-      data={filteredPartsOfSpeech}
       renderItem={renderListItem}
+      data={filteredPartsOfSpeech}
       keyExtractor={(item, index) => index.toString()}
     />
   );
