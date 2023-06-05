@@ -23,7 +23,7 @@ const Word = () => {
               {word.word}
             </Text>
             <Text style={{ color: COLORS.greylight, fontFamily: FONTS.light }}>
-              /{word.pronunciation.all}/
+              {word.pronunciation && `/${word.pronunciation.all}/`}
             </Text>
           </View>
 

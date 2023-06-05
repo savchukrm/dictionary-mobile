@@ -1,7 +1,7 @@
 import { View, SafeAreaView } from 'react-native';
 import { useSelector } from 'react-redux';
 
-import { Header, FocusedStatusBar, Search, Word } from '../components';
+import { Header, FocusedStatusBar, Search, Word, Images } from '../components';
 import { COLORS } from '../constants';
 
 const Main = () => {
@@ -16,10 +16,14 @@ const Main = () => {
 
         <View
           showsVerticalScrollIndicator={false}
-          style={{ marginTop: 50, alignItems: 'center' }}
+          style={{
+            marginTop: 50,
+            alignItems: 'center',
+          }}
         >
           <Search />
           {status === 'success' && word.results && <Word />}
+          <Images />
         </View>
       </View>
     </SafeAreaView>
