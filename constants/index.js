@@ -1,4 +1,4 @@
 import assets from './assets';
-import { COLORS } from './theme';
+import { COLORS, FONTS } from './theme';
 
-export { COLORS, assets };
+export { COLORS, FONTS, assets };

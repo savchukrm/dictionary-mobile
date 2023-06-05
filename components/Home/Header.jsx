@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text } from 'react-native';
 
-import { COLORS } from '../../constants';
+import { COLORS, FONTS } from '../../constants';
 
 const Header = () => {
   return (
@@ -15,7 +15,13 @@ const Header = () => {
         borderBottomColor: COLORS.white,
       }}
     >
-      <Text style={{ fontSize: 20, fontWeight: 600, color: COLORS.white }}>
+      <Text
+        style={{
+          fontSize: 20,
+          color: COLORS.white,
+          fontFamily: FONTS.bold,
+        }}
+      >
         Meaningo
       </Text>
     </View>

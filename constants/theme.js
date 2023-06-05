@@ -11,3 +11,11 @@ export const COLORS = {
   greylight: '#a0a0a0',
   greysecond: '#525f7f',
 };
+
+export const FONTS = {
+  bold: 'MontserratBold',
+  light: 'MontserratLight',
+  medium: 'MontserratMedium',
+  regular: 'MontserratRegular',
+  semiBold: 'MontserratSemiBold',
+};

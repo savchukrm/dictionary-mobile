@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 
 import Category from './Category';
 
-import { COLORS } from '../../constants';
+import { COLORS, FONTS } from '../../constants';
 
 const Word = () => {
   const { word, status } = useSelector((state) => state.data);
@@ -14,11 +14,15 @@ const Word = () => {
         <View>
           <View style={{ marginBottom: 20 }}>
             <Text
-              style={{ fontSize: 30, color: COLORS.white, fontWeight: '600' }}
+              style={{
+                fontSize: 30,
+                color: COLORS.white,
+                fontFamily: FONTS.medium,
+              }}
             >
               {word.word}
             </Text>
-            <Text style={{ color: COLORS.greylight }}>
+            <Text style={{ color: COLORS.greylight, fontFamily: FONTS.light }}>
               /{word.pronunciation.all}/
             </Text>
           </View>

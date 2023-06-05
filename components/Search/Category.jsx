@@ -8,7 +8,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 
-import { COLORS } from '../../constants';
+import { COLORS, FONTS } from '../../constants';
 
 const Category = () => {
   const [showAll, setShowAll] = useState(false);
@@ -128,12 +128,23 @@ const Category = () => {
 
     return (
       <View style={styles.list}>
-        <Text style={[styles.heading, { color: COLORS.greylight }]}>{pos}</Text>
+        <Text
+          style={[
+            styles.heading,
+            { color: COLORS.greylight, fontFamily: FONTS.regular },
+          ]}
+        >
+          {pos}
+        </Text>
 
         {displayItems.map((item, i) => (
-          <View key={i} style={{ marginBottom: 10 }}>
+          <View key={i} style={{ marginBottom: 20 }}>
             <Text
-              style={{ color: COLORS.white, fontSize: 16, fontWeight: '500' }}
+              style={{
+                fontSize: 15,
+                color: COLORS.white,
+                fontFamily: FONTS.regular,
+              }}
             >
               {item[0]}
             </Text>
@@ -180,26 +191,28 @@ const styles = StyleSheet.create({
   },
   text: {
     color: COLORS.darkblue,
+    fontFamily: FONTS.medium,
   },
   heading: {
     marginBottom: 8,
   },
   synonyms: {
+    fontWeight: '300',
     fontStyle: 'italic',
-    color: COLORS.greylight,
     flexDirection: 'row',
+    color: COLORS.greylight,
   },
   btnBlock: {
     marginTop: 8,
   },
   btn: {
-    width: 75,
-    borderBottomColor: COLORS.greylight,
+    width: 80,
     borderBottomWidth: 1,
+    borderBottomColor: COLORS.greylight,
   },
   btnText: {
     color: COLORS.greylight,
-    fontWeight: 'bold',
+    fontFamily: FONTS.regular,
   },
 });
 

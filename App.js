@@ -1,7 +1,7 @@
-import { useEffect } from 'react';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { NavigationContainer, DefaultTheme } from '@react-navigation/native';
 import { Provider } from 'react-redux';
+import { useFonts } from 'expo-font';
 import { store } from './redux/store';
 
 import Main from './screens/Main';
@@ -20,6 +20,17 @@ const theme = {
 };
 
 const App = () => {
+  const [loaded] = useFonts({
+    MontserratBold: require('./assets/fonts/Montserrat-Bold.ttf'),
+    MontserratLight: require('./assets/fonts/Montserrat-Light.ttf'),
+    MontserratMedium: require('./assets/fonts/Montserrat-Medium.ttf'),
+    MontserratRegular: require('./assets/fonts/Montserrat-Regular.ttf'),
+    MontserratSemiBold: require('./assets/fonts/Montserrat-ExtraBold.ttf'),
+  });
+  ``;
+  if (!loaded) {
+    return null;
+  }
   return (
     <Provider store={store}>
       <NavigationContainer theme={theme}>

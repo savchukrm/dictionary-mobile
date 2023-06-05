@@ -1,6 +1,6 @@
 import { TouchableOpacity, Text, StyleSheet } from 'react-native';
 
-import { COLORS } from '../constants';
+import { COLORS, FONTS } from '../constants';
 
 const Button = ({ title, onPress, disabled }) => (
   <TouchableOpacity
@@ -25,6 +25,7 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     color: COLORS.white,
+    fontFamily: FONTS.medium,
   },
   enabledButton: {
     backgroundColor: COLORS.greysecond,

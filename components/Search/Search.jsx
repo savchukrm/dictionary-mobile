@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 
 import { fetchData } from '../../redux/data/action';
 
-import { COLORS } from '../../constants';
+import { COLORS, FONTS } from '../../constants';
 import Button from '../Button';
 
 const Search = () => {
@@ -55,6 +55,7 @@ const styles = StyleSheet.create({
     width: '67%',
     marginBottom: 10,
     borderRadius: 10,
+    fontFamily: FONTS.light,
     backgroundColor: COLORS.white,
   },
   button: {
