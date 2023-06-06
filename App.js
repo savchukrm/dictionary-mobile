@@ -7,7 +7,10 @@ import { store } from './redux/store';
 import Main from './screens/Main';
 import Folder from './screens/Folder';
 import Profile from './screens/Profile';
+import Login from './screens/Login';
 import { Navigation } from './components';
+
+import './firebase';
 
 const Tab = createMaterialTopTabNavigator();
 
@@ -44,6 +47,7 @@ const App = () => {
           <Tab.Screen name="Main" component={Main} />
           <Tab.Screen name="Folder" component={Folder} />
           <Tab.Screen name="Profile" component={Profile} />
+          <Tab.Screen name="Login" component={Login} />
         </Tab.Navigator>
         <Navigation />
       </NavigationContainer>

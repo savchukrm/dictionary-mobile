@@ -15,6 +15,7 @@ const Word = () => {
           marginTop: 30,
           paddingHorizontal: 30,
           color: COLORS.white,
+          width: '100%',
         }}
       >
         {status === 'success' && word.results && (
