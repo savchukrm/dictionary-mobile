@@ -1,4 +1,4 @@
-import { View, SafeAreaView } from 'react-native';
+import { SafeAreaView } from 'react-native';
 
 import { Header, FocusedStatusBar, Content } from '../components';
 import { COLORS } from '../constants';
