@@ -68,7 +68,7 @@ const Navigation = () => {
       <TouchableWithoutFeedback
         onPressIn={handleFolderPressIn}
         onPressOut={handleFolderPressOut}
-        onPress={() => navigation.navigate('Folder')}
+        onPress={() => navigation.navigate('Sets')}
       >
         <View style={[{ flex: 1, alignItems: 'center' }]}>
           <Icon

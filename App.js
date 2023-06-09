@@ -5,9 +5,11 @@ import { useFonts } from 'expo-font';
 import { store } from './redux/store';
 
 import Main from './screens/Main';
-import Folder from './screens/Folder';
-import Profile from './screens/Profile';
+import Sets from './screens/Sets';
+import Lists from './screens/Lists';
 import Login from './screens/Login';
+import Folders from './screens/Folders';
+import Profile from './screens/Profile';
 import { Navigation } from './components';
 
 import './firebase';
@@ -30,24 +32,28 @@ const App = () => {
     MontserratRegular: require('./assets/fonts/Montserrat-Regular.ttf'),
     MontserratSemiBold: require('./assets/fonts/Montserrat-ExtraBold.ttf'),
   });
-  ``;
+
   if (!loaded) {
     return null;
   }
+
   return (
     <Provider store={store}>
       <NavigationContainer theme={theme}>
         <Tab.Navigator
           tabBar={() => null}
           initialRouteName="Main"
-          screenOptions={{
-            swipeEnabled: true,
-          }}
+          screenOptions={({ route }) => ({
+            swipeEnabled: !['Login', 'Folders', 'Lists'].includes(route.name),
+          })}
         >
           <Tab.Screen name="Main" component={Main} />
-          <Tab.Screen name="Folder" component={Folder} />
+          <Tab.Screen name="Sets" component={Sets} />
           <Tab.Screen name="Profile" component={Profile} />
+
           <Tab.Screen name="Login" component={Login} />
+          <Tab.Screen name="Folders" component={Folders} />
+          <Tab.Screen name="Lists" component={Lists} />
         </Tab.Navigator>
         <Navigation />
       </NavigationContainer>
