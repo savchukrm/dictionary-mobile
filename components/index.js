@@ -5,15 +5,19 @@ import Search from './Search/Search';
 import Images from './Search/Images';
 import Navigation from './Navigation';
 import Content from './Home/Content';
+import IsAuth from './Profile/IsAuth';
+import Unauthorized from './Profile/Unauthorized';
 import FocusedStatusBar from './Home/FocusedStatusBar';
 
 export {
   Word,
+  IsAuth,
   Button,
   Images,
   Header,
   Search,
   Content,
   Navigation,
+  Unauthorized,
   FocusedStatusBar,
 };

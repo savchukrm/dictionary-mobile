@@ -7,7 +7,8 @@ import { store } from './redux/store';
 import Main from './screens/Main';
 import Sets from './screens/Sets';
 import Lists from './screens/Lists';
-import Login from './screens/Login';
+import Login from './screens/Auth/Login';
+import SignUp from './screens/Auth/SignUp';
 import Folders from './screens/Folders';
 import Profile from './screens/Profile';
 import { Navigation } from './components';
@@ -52,6 +53,7 @@ const App = () => {
           <Tab.Screen name="Profile" component={Profile} />
 
           <Tab.Screen name="Login" component={Login} />
+          <Tab.Screen name="SignUp" component={SignUp} />
           <Tab.Screen name="Folders" component={Folders} />
           <Tab.Screen name="Lists" component={Lists} />
         </Tab.Navigator>

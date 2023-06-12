@@ -1,5 +1,7 @@
-import { useNavigation } from '@react-navigation/native';
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { useNavigation } from '@react-navigation/native';
+
 import {
   Text,
   View,
@@ -9,34 +11,27 @@ import {
   KeyboardAvoidingView,
 } from 'react-native';
 
-import {
-  getAuth,
-  signInWithEmailAndPassword,
-  createUserWithEmailAndPassword,
-} from 'firebase/auth';
+import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
 
-const Login = () => {
-  const navigate = useNavigation();
+import { setUser } from '../../redux/user/slice';
+
+const SignUp = () => {
+  const navigation = useNavigation();
+  const dispatch = useDispatch();
 
   const auth = getAuth();
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleLogin = () => {
-    signInWithEmailAndPassword(auth, email, password)
-      .then((userCredentials) => {
-        const user = userCredentials.user;
-        alert.alert('Logged in!', `Welcome ${user.email}!`);
-      })
-      .catch((error) => alert(error.message));
-  };
-
   const handleSignUp = () => {
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredentials) => {
         const user = userCredentials.user;
-        alert.alert('Registered with:', user.email);
+        dispatch(setUser({ email: user.email, id: user.uid }));
+        setEmail('');
+        setPassword('');
+        navigation.navigate('Main');
       })
       .catch((error) => alert(error.message));
   };
@@ -60,14 +55,8 @@ const Login = () => {
       </View>
 
       <View style={styles.buttonContainer}>
-        <TouchableOpacity onPress={handleLogin} style={styles.button}>
-          <Text style={styles.buttonText}>Login</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={handleSignUp}
-          style={[styles.button, styles.buttonOutline]}
-        >
-          <Text style={styles.buttonOutlineText}>Register</Text>
+        <TouchableOpacity onPress={handleSignUp} style={styles.button}>
+          <Text style={styles.buttonText}>Register</Text>
         </TouchableOpacity>
       </View>
     </KeyboardAvoidingView>
@@ -77,48 +66,43 @@ const Login = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
     alignItems: 'center',
+    justifyContent: 'center',
   },
   inputContainer: {
     width: '80%',
   },
   input: {
-    backgroundColor: 'white',
-    paddingHorizontal: 15,
-    paddingVertical: 10,
-    borderRadius: 10,
     marginTop: 5,
+    borderRadius: 10,
+    paddingVertical: 10,
+    paddingHorizontal: 15,
+    backgroundColor: 'white',
   },
   buttonContainer: {
     width: '60%',
-    justifyContent: 'center',
-    alignItems: 'center',
     marginTop: 40,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   button: {
-    backgroundColor: '#0782F9',
-    width: '100%',
     padding: 15,
+    width: '100%',
     borderRadius: 10,
     alignItems: 'center',
+    backgroundColor: '#0782F9',
   },
   buttonOutline: {
-    backgroundColor: 'white',
     marginTop: 5,
-    borderColor: '#0782F9',
     borderWidth: 2,
+    borderColor: '#0782F9',
+    backgroundColor: 'white',
   },
   buttonText: {
+    fontSize: 16,
     color: 'white',
     fontWeight: '700',
-    fontSize: 16,
-  },
-  buttonOutlineText: {
-    color: '#0782F9',
-    fontWeight: '700',
-    fontSize: 16,
   },
 });
 
-export default Login;
+export default SignUp;
