@@ -17,7 +17,6 @@ const IsAuth = () => {
       .signOut()
       .then(() => {
         dispatch(removeUser());
-        navigation.navigate('Main');
       })
       .catch((error) => alert(error.message));
   };

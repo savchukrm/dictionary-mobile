@@ -14,6 +14,7 @@ import {
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 
 import { setUser } from '../../redux/user/slice';
+import { COLORS, FONTS } from '../../constants';
 
 const Login = () => {
   const navigation = useNavigation();
@@ -58,6 +59,21 @@ const Login = () => {
         <TouchableOpacity onPress={handleLogin} style={styles.button}>
           <Text style={styles.buttonText}>Login</Text>
         </TouchableOpacity>
+
+        <View style={styles.redirect}>
+          <Text style={styles.question}>Don't have an account?</Text>
+
+          <TouchableOpacity>
+            <View style={styles.redirectBtn}>
+              <Text
+                onPress={() => navigation.navigate('SignUp')}
+                style={{ color: COLORS.white, fontFamily: FONTS.medium }}
+              >
+                Register
+              </Text>
+            </View>
+          </TouchableOpacity>
+        </View>
       </View>
     </KeyboardAvoidingView>
   );
@@ -66,42 +82,54 @@ const Login = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
+    gap: 30,
     alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: COLORS.darkblue,
   },
   inputContainer: {
+    gap: 10,
     width: '80%',
   },
   input: {
-    backgroundColor: 'white',
-    paddingHorizontal: 15,
-    paddingVertical: 10,
     borderRadius: 10,
-    marginTop: 5,
+    paddingVertical: 20,
+    paddingHorizontal: 15,
+    color: COLORS.greysecond,
+    fontFamily: FONTS.regular,
+    backgroundColor: COLORS.white,
   },
   buttonContainer: {
-    width: '60%',
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginTop: 40,
+    gap: 28,
+    width: '80%',
   },
   button: {
-    backgroundColor: '#0782F9',
+    padding: 16,
     width: '100%',
-    padding: 15,
     borderRadius: 10,
     alignItems: 'center',
-  },
-  buttonOutline: {
-    backgroundColor: 'white',
-    marginTop: 5,
-    borderColor: '#0782F9',
-    borderWidth: 2,
+    backgroundColor: COLORS.blue,
   },
   buttonText: {
+    fontSize: 17,
     color: 'white',
-    fontWeight: '700',
-    fontSize: 16,
+    fontFamily: FONTS.medium,
+  },
+  redirect: {
+    gap: 10,
+    flexDirection: 'row',
+    justifyContent: 'center',
+  },
+  question: {
+    fontSize: 15,
+    marginBottom: 10,
+    textAlign: 'center',
+    color: COLORS.greylight,
+    fontFamily: FONTS.regular,
+  },
+  redirectBtn: {
+    borderBottomWidth: 1,
+    borderBottomColor: COLORS.white,
   },
 });
 

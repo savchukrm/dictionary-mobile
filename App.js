@@ -13,7 +13,7 @@ import Folders from './screens/Folders';
 import Profile from './screens/Profile';
 import { Navigation } from './components';
 
-import './firebase';
+import './firebase/firebase';
 
 const Tab = createMaterialTopTabNavigator();
 
