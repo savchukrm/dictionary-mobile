@@ -2,30 +2,19 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
 
-import {
-  Text,
-  View,
-  TextInput,
-  StyleSheet,
-  TouchableOpacity,
-  KeyboardAvoidingView,
-} from 'react-native';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
 
-import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
+import { Form } from '../../components';
 
 import { setUser } from '../../redux/user/slice';
-import { COLORS, FONTS } from '../../constants';
 
 const SignUp = () => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
 
-  const auth = getAuth();
+  const [errorMessage, setErrorMessage] = useState('');
 
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-
-  const handleSignUp = () => {
+  const handleSignUp = (email, password, setEmail, setPassword, auth) => {
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredentials) => {
         const user = userCredentials.user;
@@ -34,103 +23,45 @@ const SignUp = () => {
         setPassword('');
         navigation.navigate('Main');
       })
-      .catch((error) => alert(error.message));
+      .catch((error) => {
+        let errorCode = error.code;
+
+        switch (errorCode) {
+          case 'auth/email-already-in-use':
+            setErrorMessage('Email already in use');
+            break;
+          case 'auth/invalid-email':
+            setErrorMessage('Invalid email');
+            break;
+          case 'auth/weak-password':
+            setErrorMessage('The password is too weak.');
+            break;
+          case 'auth/too-many-requests':
+            setErrorMessage('Too many requests. Please try again in 1 minute');
+            break;
+          case 'auth/network-request-failed':
+            setErrorMessage('Network request failed');
+            break;
+          case 'auth/missing-password':
+            setErrorMessage('Missing password');
+            break;
+          default:
+            break;
+        }
+      });
   };
 
   return (
-    <KeyboardAvoidingView style={styles.container} behavior="padding">
-      <View style={styles.inputContainer}>
-        <TextInput
-          placeholder="Email"
-          value={email}
-          onChangeText={(text) => setEmail(text)}
-          style={styles.input}
-        />
-        <TextInput
-          placeholder="Password"
-          value={password}
-          onChangeText={(text) => setPassword(text)}
-          style={styles.input}
-          secureTextEntry
-        />
-      </View>
-
-      <View style={styles.buttonContainer}>
-        <TouchableOpacity onPress={handleSignUp} style={styles.button}>
-          <Text style={styles.buttonText}>Register</Text>
-        </TouchableOpacity>
-
-        <View style={styles.redirect}>
-          <Text style={styles.question}>Already have an account?</Text>
-
-          <TouchableOpacity>
-            <View style={styles.redirectBtn}>
-              <Text
-                onPress={() => navigation.navigate('Login')}
-                style={{ color: COLORS.white, fontFamily: FONTS.medium }}
-              >
-                Log in
-              </Text>
-            </View>
-          </TouchableOpacity>
-        </View>
-      </View>
-    </KeyboardAvoidingView>
+    <Form
+      title="Register"
+      redirectName="Log in"
+      header="Create a new account"
+      handleAct={handleSignUp}
+      errorMessage={errorMessage}
+      redirectMessage="Already have an account?"
+      redirectAct={() => navigation.navigate('Login')}
+    />
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    gap: 30,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: COLORS.darkblue,
-  },
-  inputContainer: {
-    gap: 10,
-    width: '80%',
-  },
-  input: {
-    borderRadius: 10,
-    paddingVertical: 20,
-    paddingHorizontal: 15,
-    color: COLORS.greysecond,
-    fontFamily: FONTS.regular,
-    backgroundColor: COLORS.white,
-  },
-  buttonContainer: {
-    gap: 28,
-    width: '80%',
-  },
-  button: {
-    padding: 16,
-    width: '100%',
-    borderRadius: 10,
-    alignItems: 'center',
-    backgroundColor: COLORS.blue,
-  },
-  buttonText: {
-    fontSize: 17,
-    color: 'white',
-    fontFamily: FONTS.medium,
-  },
-  redirect: {
-    gap: 10,
-    flexDirection: 'row',
-    justifyContent: 'center',
-  },
-  question: {
-    fontSize: 15,
-    marginBottom: 10,
-    textAlign: 'center',
-    color: COLORS.greylight,
-    fontFamily: FONTS.regular,
-  },
-  redirectBtn: {
-    borderBottomWidth: 1,
-    borderBottomColor: COLORS.white,
-  },
-});
 
 export default SignUp;
