@@ -1,8 +1,8 @@
-import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
+import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer, DefaultTheme } from '@react-navigation/native';
 import { Provider } from 'react-redux';
-import { useFonts } from 'expo-font';
 import { store } from './redux/store';
+import { useFonts } from 'expo-font';
 
 import Main from './screens/Main';
 import Sets from './screens/Sets';
@@ -11,11 +11,11 @@ import Login from './screens/Auth/Login';
 import SignUp from './screens/Auth/SignUp';
 import Folders from './screens/Folders';
 import Profile from './screens/Profile';
-import { Navigation } from './components';
+import Navigation from './components/Navigation';
 
 import './firebase/firebase';
 
-const Tab = createMaterialTopTabNavigator();
+const Stack = createStackNavigator();
 
 const theme = {
   ...DefaultTheme,
@@ -41,22 +41,19 @@ const App = () => {
   return (
     <Provider store={store}>
       <NavigationContainer theme={theme}>
-        <Tab.Navigator
-          tabBar={() => null}
+        <Stack.Navigator
+          screenOptions={{ headerShown: false }}
           initialRouteName="Main"
-          screenOptions={({ route }) => ({
-            swipeEnabled: !['Login', 'Folders', 'Lists'].includes(route.name),
-          })}
         >
-          <Tab.Screen name="Main" component={Main} />
-          <Tab.Screen name="Sets" component={Sets} />
-          <Tab.Screen name="Profile" component={Profile} />
+          <Stack.Screen name="Main" component={Main} />
+          <Stack.Screen name="Sets" component={Sets} />
+          <Stack.Screen name="Profile" component={Profile} />
 
-          <Tab.Screen name="Login" component={Login} />
-          <Tab.Screen name="SignUp" component={SignUp} />
-          <Tab.Screen name="Folders" component={Folders} />
-          <Tab.Screen name="Lists" component={Lists} />
-        </Tab.Navigator>
+          <Stack.Screen name="Lists" component={Lists} />
+          <Stack.Screen name="Folders" component={Folders} />
+          <Stack.Screen name="Login" component={Login} />
+          <Stack.Screen name="SignUp" component={SignUp} />
+        </Stack.Navigator>
         <Navigation />
       </NavigationContainer>
     </Provider>
