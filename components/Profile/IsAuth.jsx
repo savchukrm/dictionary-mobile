@@ -1,30 +1,23 @@
-import React from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
 
-import { getAuth } from 'firebase/auth';
-
-import { removeUser } from '../../redux/user/slice';
+import LogOut from '../Auth/LogOut';
 
 const IsAuth = () => {
-  const auth = getAuth();
-  const dispatch = useDispatch();
-  const navigation = useNavigation();
+  const [confirmLogOut, setConfirmLogOut] = useState(false);
 
-  const handleSignOut = () => {
-    auth
-      .signOut()
-      .then(() => {
-        dispatch(removeUser());
-      })
-      .catch((error) => alert(error.message));
-  };
   return (
     <View style={styles.container}>
-      <TouchableOpacity onPress={handleSignOut} style={styles.button}>
-        <Text style={styles.buttonText}>LogOut</Text>
-      </TouchableOpacity>
+      {confirmLogOut ? (
+        <LogOut closeConfirmation={setConfirmLogOut} />
+      ) : (
+        <TouchableOpacity
+          onPress={() => setConfirmLogOut(true)}
+          style={styles.button}
+        >
+          <Text style={styles.buttonText}>Log Out</Text>
+        </TouchableOpacity>
+      )}
     </View>
   );
 };
