@@ -1,24 +1,29 @@
-import { SafeAreaView, Text, View, Image, StyleSheet } from 'react-native';
-
-import { FocusedStatusBar } from '../components';
+import { Text, View, Image, StyleSheet, TouchableOpacity } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 import { COLORS, assets, FONTS } from '../constants';
 
 const Sets = () => {
+  const navigation = useNavigation();
+
   return (
-    <SafeAreaView
+    <View
       style={{
         flex: 1,
-        gap: 30,
         alignItems: 'center',
         backgroundColor: COLORS.darkblue,
       }}
     >
-      <FocusedStatusBar barStyle={'light-content'} />
-
-      <View style={[styles.block, { marginTop: 40 }]}>
+      <TouchableOpacity
+        style={styles.block}
+        onPress={() => navigation.navigate('Lists')}
+      >
         <View
-          style={{ alignItems: 'center', backgroundColor: '#fff', padding: 20 }}
+          style={{
+            padding: 20,
+            alignItems: 'center',
+            backgroundColor: '#fff',
+          }}
         >
           <Image
             resizeMode="cover"
@@ -27,9 +32,12 @@ const Sets = () => {
           />
         </View>
         <Text style={styles.text}>Lists</Text>
-      </View>
+      </TouchableOpacity>
 
-      <View style={[styles.block, { backgroundColor: '#701711' }]}>
+      <TouchableOpacity
+        style={[styles.block, { backgroundColor: '#701711' }]}
+        onPress={() => navigation.navigate('Folders')}
+      >
         <View
           style={{ alignItems: 'center', backgroundColor: '#fff', padding: 10 }}
         >
@@ -40,14 +48,15 @@ const Sets = () => {
           />
         </View>
         <Text style={styles.text}>Folders</Text>
-      </View>
-    </SafeAreaView>
+      </TouchableOpacity>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
   block: {
     width: '90%',
+    marginTop: 60,
     paddingTop: 20,
     paddingHorizontal: 20,
     backgroundColor: '#267388',

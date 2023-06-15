@@ -6,6 +6,8 @@ import Search from './Search/Search';
 import Images from './Search/Images';
 import Content from './Home/Content';
 import IsAuth from './Profile/IsAuth';
+import AllBlocks from './ListsBlocks/AllBlocks';
+import AllFolders from './FoldersBlocks/AllFolders';
 import Unauthorized from './Profile/Unauthorized';
 import FocusedStatusBar from './Home/FocusedStatusBar';
 
@@ -18,6 +20,8 @@ export {
   Header,
   Search,
   Content,
+  AllBlocks,
+  AllFolders,
   Unauthorized,
   FocusedStatusBar,
 };
