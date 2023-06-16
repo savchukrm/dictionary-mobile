@@ -9,7 +9,7 @@ export const fetchData = createAsyncThunk(
       method: 'GET',
       url: `https://wordapi18v1.p.rapidapi.com/words/${param}`,
       headers: {
-        'X-RapidAPI-Key': process.env.REACT_APP_API_KEY,
+        'X-RapidAPI-Key': '',
         'X-RapidAPI-Host': 'wordsapiv1.p.rapidapi.com',
       },
     };
