@@ -6,6 +6,9 @@ import { useFonts } from 'expo-font';
 
 import Main from './screens/Main';
 import Sets from './screens/Sets';
+import List from './screens/List';
+import Favourite from './screens/Favourite';
+
 import Lists from './screens/Lists';
 import Login from './screens/Auth/Login';
 import SignUp from './screens/Auth/SignUp';
@@ -53,6 +56,9 @@ const App = () => {
           <Stack.Screen name="Folders" component={Folders} />
           <Stack.Screen name="Login" component={Login} />
           <Stack.Screen name="SignUp" component={SignUp} />
+
+          <Stack.Screen name="Favourite" component={Favourite} />
+          <Stack.Screen name="List" component={List} />
         </Stack.Navigator>
         <Navigation />
       </NavigationContainer>

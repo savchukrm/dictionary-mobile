@@ -4,9 +4,10 @@ import { useNavigation } from '@react-navigation/native';
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-const Header = ({ createItem }) => {
-  // createItem - future function to create a new item as new list or folder for user
+const Hat = ({ list }) => {
   const navigation = useNavigation();
+
+  // list name for future function to create flascard function
 
   return (
     <View
@@ -22,10 +23,10 @@ const Header = ({ createItem }) => {
       </TouchableOpacity>
 
       <TouchableOpacity>
-        <Icon name="add" size={33} color="white" />
+        <Icon name="layers" size={33} color="white" />
       </TouchableOpacity>
     </View>
   );
 };
 
-export default Header;
+export default Hat;

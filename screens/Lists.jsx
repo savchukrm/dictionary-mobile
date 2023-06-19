@@ -7,7 +7,7 @@ import { getUserLists } from '../utils/lists/lists';
 import { setFav } from '../redux/fav/slice';
 import { setLists } from '../redux/lists/slice';
 
-import { AllBlocks } from '../components';
+import { AllBlocks, ListHeader } from '../components';
 
 import { COLORS, FONTS } from '../constants';
 
@@ -61,6 +61,10 @@ const Lists = () => {
     >
       <View style={styles.top}>
         <Text style={styles.header}>All lists</Text>
+      </View>
+
+      <View style={{ alignItems: 'center' }}>
+        <ListHeader />
       </View>
 
       <AllBlocks />
