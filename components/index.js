@@ -8,6 +8,7 @@ import Search from './Search/Search';
 import Images from './Search/Images';
 import Content from './Home/Content';
 import IsAuth from './Profile/IsAuth';
+import WordBlock from './ListsBlocks/WordBlock';
 import AllBlocks from './ListsBlocks/AllBlocks';
 import AllFolders from './FoldersBlocks/AllFolders';
 import Unauthorized from './Profile/Unauthorized';
@@ -24,6 +25,7 @@ export {
   Search,
   Content,
   AllBlocks,
+  WordBlock,
   ListHeader,
   AllFolders,
   Unauthorized,
