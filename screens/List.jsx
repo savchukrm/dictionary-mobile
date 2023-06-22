@@ -55,20 +55,19 @@ const ListScreen = ({ route }) => {
           const [meanings, { all: pronunciation }, mainDefinition] = content;
 
           return (
-            <>
+            <React.Fragment key={i}>
               {word === 'createdAt' ? (
                 <Text style={styles.warning}>
-                  You do not have any saved items in the current list !
+                  You do not have any saved items in the current list!
                 </Text>
               ) : (
                 <WordBlock
-                  key={i}
                   word={word}
                   definition={mainDefinition}
                   pronunciation={pronunciation}
                 />
               )}
-            </>
+            </React.Fragment>
           );
         })
       )}
