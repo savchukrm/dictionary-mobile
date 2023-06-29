@@ -48,9 +48,7 @@ const Word = () => {
             </View>
 
             {isAuth ? (
-              <View style={{ position: 'absolute', right: 0, top: 15 }}>
-                <Popup />
-              </View>
+              <Popup />
             ) : (
               <TouchableOpacity
                 style={{ position: 'absolute', right: 0, top: 15 }}

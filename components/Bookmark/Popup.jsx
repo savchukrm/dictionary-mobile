@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
 
 import Icon from 'react-native-vector-icons/Ionicons';
+import Iconn from 'react-native-vector-icons/FontAwesome';
 
 import {
   addWordToFavorite,
@@ -24,6 +25,7 @@ import { COLORS, FONTS } from '../../constants';
 
 const Popup = () => {
   const dispatch = useDispatch();
+  const navigation = useNavigation();
 
   const [isOpen, setIsOpen] = useState(false);
   const [isInList, setIsInList] = useState();
@@ -119,20 +121,52 @@ const Popup = () => {
   };
 
   return (
-    <View>
+    <View style={styles.container}>
       <TouchableOpacity onPress={() => setIsOpen(!isOpen)}>
         <Icon name="bookmark" size={40} color={COLORS.greysecond} />
       </TouchableOpacity>
 
       {isOpen && (
         <View style={styles.popupList}>
-          <TouchableOpacity>
-            <Text>Create new list</Text>
+          <TouchableOpacity
+            onPress={() => navigation.navigate('Lists')}
+            style={styles.popupItem}
+          >
+            <Text style={styles.popupMainText}>Create new list</Text>
           </TouchableOpacity>
 
-          <TouchableOpacity>
-            <Text>Favourites</Text>
+          <TouchableOpacity
+            onPress={toggleIsInFavorite}
+            style={styles.popupItem}
+          >
+            <Text style={styles.popupItemText}>Favourites</Text>
+
+            {isInList ? (
+              <Iconn name="check" size={20} color={COLORS.white} />
+            ) : null}
           </TouchableOpacity>
+
+          {lists.map((item, i) => {
+            const [listName] = item;
+            const isInList = listStates[listName];
+            const shouldRenderTick = isInList?.[word.word] ?? false;
+
+            return (
+              <TouchableOpacity
+                key={i}
+                onPress={() => {
+                  toggleWordInList(listName);
+                }}
+                style={styles.popupItem}
+              >
+                <Text style={styles.popupItemText}>{listName}</Text>
+
+                {shouldRenderTick && (
+                  <Iconn name="check" size={20} color={COLORS.white} />
+                )}
+              </TouchableOpacity>
+            );
+          })}
         </View>
       )}
     </View>
@@ -140,15 +174,38 @@ const Popup = () => {
 };
 
 const styles = StyleSheet.create({
+  container: {
+    position: 'absolute',
+    right: 0,
+    top: 10,
+    zIndex: 1000,
+  },
   popupList: {
     position: 'absolute',
     top: '100%',
-    zIndex: 1000,
     width: 200,
     right: 5,
-    backgroundColor: COLORS.greylight,
-    padding: 10,
+    backgroundColor: COLORS.teal,
+    padding: 12,
     borderRadius: 10,
+  },
+  popupItem: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginBottom: 8,
+    paddingVertical: 5,
+    borderRadius: 10,
+    backgroundColor: COLORS.teal,
+  },
+  popupMainText: {
+    color: COLORS.white,
+    fontFamily: FONTS.medium,
+  },
+  popupItemText: {
+    color: COLORS.white,
+
+    fontFamily: FONTS.regular,
   },
 });
 
