@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, SafeAreaView } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { getUserFavorite } from '../utils/favs/favs';
-import { getUserLists } from '../utils/lists/lists';
+import { getUserLists, createNewList } from '../utils/lists/lists';
 import { setFav } from '../redux/fav/slice';
 import { setLists } from '../redux/lists/slice';
 
@@ -15,6 +15,7 @@ const Lists = () => {
   const dispatch = useDispatch();
 
   const { id } = useSelector((state) => state.user);
+  const { lists } = useSelector((state) => state.lists);
 
   useEffect(() => {
     if (id !== null) {
@@ -52,6 +53,12 @@ const Lists = () => {
     }
   }, [dispatch, id]);
 
+  const newList = (id, inputText) => {
+    createNewList(id, inputText);
+    const now = new Date().toISOString();
+    dispatch(setLists([...lists, [inputText, { createdAt: now }]]));
+  };
+
   return (
     <SafeAreaView
       style={{
@@ -64,7 +71,7 @@ const Lists = () => {
       </View>
 
       <View style={{ alignItems: 'center' }}>
-        <ListHeader />
+        <ListHeader title="list" createItem={newList} />
       </View>
 
       <AllBlocks />

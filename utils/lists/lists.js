@@ -52,3 +52,15 @@ export const removeWordFromList = async (userId, name, word) => {
     })
     .catch((error) => console.log(error));
 };
+
+export const createNewList = (userId, name) => {
+  const now = new Date().toISOString();
+
+  get(ref(database, `users/${userId}/lists/`))
+    .then(() => {
+      set(ref(database, `users/${userId}/lists/${name}`), {
+        createdAt: now,
+      }).catch((error) => console.log(error));
+    })
+    .catch((error) => console.log(error));
+};
